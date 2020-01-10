@@ -1,0 +1,17 @@
+
+.nav-bar {
+    background-color: #283069;
+    height: 50px;
+}
+.nav-item > .nav-link {
+    color: white;
+    padding: 10px;
+}
+
+.nav-item > .nav-link:hover {
+    color: white;
+    text-decoration: underline;
+}
+.nav-logo {
+    width: 75px;
+}
