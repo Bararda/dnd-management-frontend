@@ -2,15 +2,27 @@
     display: flex;
     align-items: center;
     height: calc(100% - 0px);
-    background: linear-gradient(#141836 50%,#59160E);
+    background: linear-gradient(#283069 50%,#59160E);
 }
 
 #login-form-container {
-    width: 20%;
-    margin: auto;
-    padding: 10px;
+    padding: 20px;
     background-color: #E7E7DB;
     border: 1px solid gray;
     height: 50%;
     border-radius: 5px;
+}
+#logo-container {
+    height: 100%;
+    width: 20%;
+    margin: auto;
+
+}
+#logo {
+    width: 40%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }

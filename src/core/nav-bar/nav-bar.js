@@ -1,7 +1,7 @@
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import React from "react";
-import "../../assets/images/dnd_logo.svg";
+import "./nav-bar.css"
 function NavBar(props) {
     return (
         <Navbar className="nav-bar">
