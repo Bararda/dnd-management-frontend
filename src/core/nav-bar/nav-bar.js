@@ -21,7 +21,7 @@ function NavItem(props) {
 
 function NavLogo(props) {
     return (
-        <Navbar.Brand classList="" href={props.href}>{props.children}</Navbar.Brand>
+        <Navbar.Brand className="" href={props.href}>{props.children}</Navbar.Brand>
     )
 }
 

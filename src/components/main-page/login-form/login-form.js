@@ -1,9 +1,11 @@
 import React from 'react';
 import Form from "react-bootstrap/Form";
-function LoginPage(props) {
+import './login-form.css';
+function LoginForm(props) {
     return (
         <Form>
-            <Form.Group controlId="loginUsername">
+            <h2>Login</h2>
+            <Form.Group id="username" controlId="loginUsername">
                 <Form.Label>Username</Form.Label>
                 <Form.Control type="text" placeholder="Username"/>
             </Form.Group>
@@ -16,4 +18,5 @@ function LoginPage(props) {
     );
 }
 
-export default LoginPage
+export default LoginForm
+;
