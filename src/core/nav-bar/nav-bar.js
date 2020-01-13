@@ -1,11 +1,11 @@
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import React from "react";
-import "./nav-bar.css";
+import "../../assets/images/dnd_logo.svg";
 function NavBar(props) {
     return (
         <Navbar className="nav-bar">
-            <NavLogo><img src={require("./dnd_logo.svg")} className="nav-logo" alt="dnd"/></NavLogo>
+            <NavLogo><img src={require("../../assets/images/dnd_logo.svg")} className="nav-logo" alt="dnd"/></NavLogo>
             <NavItem href="#home">Home</NavItem>
         </Navbar>
     );
