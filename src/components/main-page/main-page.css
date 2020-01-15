@@ -19,10 +19,14 @@
 
 }
 #logo {
-    width: 40%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    width: 20%;    
     margin-top: 30px;
     margin-bottom: 30px;
+}
+#logo-text {
+    color: #D00000;
+    text-align: center;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
 }
