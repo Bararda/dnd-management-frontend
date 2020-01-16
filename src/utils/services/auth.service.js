@@ -2,9 +2,8 @@ class AuthService {
     constructor() {
         this.api = new Api();
     }
-    login(username, password) {
-        this.api.post('', {username, password}) {
-
-        }
+    async login(username, password) {
+       let results = await this.api.post('', {username, password});
+       console.log(results);
     }
 }

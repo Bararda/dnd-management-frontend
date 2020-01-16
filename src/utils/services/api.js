@@ -1,5 +1,9 @@
 class Api {
-    get(url, query = {}) {
+    endPointURL = 'localhost:8080/'
+    constructor() {
+
+    }
+    async get(url, query = {}) {
         url = new URL(url);
         Object.keys(query).forEach(key =>
             url.searchParams.append(key, query[key])
@@ -13,27 +17,33 @@ class Api {
         return await response.json();
     }
 
-    post(url, obj) {
+    async post(url, obj) {
         const response = await fetch(url, {
             method: "POST",
-            body: JSON.stringify(obj)
+            body: JSON.stringify(obj),
+            headers: {
+                'Content-Type': 'application/json'
+            },
         });
         return await response.json();
     }
 
-    put(url, query, updates) {
+    async put(url, query = {}, updates) {
         url = new URL(url);
         Object.keys(query).forEach(key =>
             url.searchParams.append(key, query[key])
         );
         const response = await fetch(url, {
-            method: "POST",
-            body: JSON.stringify(updates)
+            method: "PUT",
+            body: JSON.stringify(updates),
+            headers: {
+                'Content-Type': 'application/json'
+            },
         });
         return await response.json();
     }
 
-    delete(url, query) {
+    async delete(url, query = {}) {
         url = new URL(url);
         Object.keys(query).forEach(key =>
             url.searchParams.append(key, query[key])
