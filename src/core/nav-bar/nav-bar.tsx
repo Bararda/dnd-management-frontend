@@ -2,13 +2,14 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import React from "react";
 import "./nav-bar.css"
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-  } from "react-router-dom";
-function NavBar(props) {
+interface NavItemProps {
+    name?: string, // Change the required prop to an optional prop.
+    href?: string,
+}
+interface NavLogoProps {
+    href?: string,
+}
+function NavBar() {
     return (
         <Navbar className="nav-bar">
             <NavLogo><img src={require("../../assets/images/dnd_logo.svg")} className="nav-logo" alt="dnd"/></NavLogo>
@@ -18,7 +19,7 @@ function NavBar(props) {
     );
 }
 
-function NavItem(props) {
+const NavItem: React.FC<NavItemProps> = (props) => {
     return (
         <Nav.Item>
             <Nav.Link href={"/home/" + props.href}>{props.children}</Nav.Link>
@@ -26,10 +27,10 @@ function NavItem(props) {
     );
 }
 
-function NavLogo(props) {
+const NavLogo: React.FC<NavLogoProps> = (props) => {
     return (
         <Navbar.Brand className="" href={props.href}>{props.children}</Navbar.Brand>
-    )
+    );
 }
 
 export default NavBar;

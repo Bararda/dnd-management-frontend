@@ -2,16 +2,14 @@ import React from "react";
 import {
     Route,
     Redirect,
-  } from "react-router-dom";
-function PrivateRoute({ children, ...rest }) {
-    console.log('here');
-    console.log(window.localStorage.getItem("authenticated"));
+} from "react-router-dom";
+
+const PrivateRoute: React.FC<any> = (props) => {
     return (
         <Route
-            {...rest}
             render={({ location }) =>
                 window.localStorage.getItem("authenticated") ? (
-                    children
+                    props.children
                 ) : (
                     <Redirect
                         to={{
@@ -24,5 +22,6 @@ function PrivateRoute({ children, ...rest }) {
         />
     );
 }
+
 
 export default PrivateRoute;

@@ -10,6 +10,11 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+
+interface WelcomeProps {
+ name?: string, // Change the required prop to an optional prop.
+}
+
 function App() {
     return (
         <div id="app">

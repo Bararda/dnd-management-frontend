@@ -1,23 +1,22 @@
 import React from "react";
 import NavBar from "../../core/nav-bar/nav-bar";
+import Spells from "../spells/spells";
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   useRouteMatch,
-  useParams
 } from "react-router-dom";
-function HomePage(props) {
+
+const HomePage: React.FC<any> = (props) => {
     let match = useRouteMatch();
     return (
         <div>
             <NavBar></NavBar>
             <Switch>
-                <Route path={`${match.path}/spells`}>
-                    
+                <Route path={`/home/spells`}>
+                    <Spells />
                 </Route>
-                <Route path={match.path}>
+                <Route path="/home/">
                     home
                 </Route>
             </Switch>

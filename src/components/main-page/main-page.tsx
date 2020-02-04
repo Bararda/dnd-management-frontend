@@ -1,7 +1,8 @@
 import React from "react";
 import LoginForm from "./login-form/login-form";
 import "./main-page.css";
-function MainPage(props) {
+
+function MainPage() {
     return (
         <div id="main-page">
             <div id="logo-container">
