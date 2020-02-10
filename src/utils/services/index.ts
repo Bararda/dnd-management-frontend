@@ -1,7 +1,11 @@
 import AuthService from "./auth.service";
 import SpellService from "./spell.service";
-const index = {
+import DamageTypeService from "./damageType.service";
+import SchoolService from "./school.service";
+
+export {
     AuthService,
-    SpellService
-}
-export default index;
+    SpellService,
+    DamageTypeService,
+    SchoolService
+};

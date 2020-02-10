@@ -1,3 +1,12 @@
 html, body, #root, #app {
     height: 100%;
 }
+@media (prefers-color-scheme: dark) {
+    html, body, #root, #app {
+        background-color: #242425;
+        color: white;
+    }
+    .accordion > .card {
+        background-color: #242425;
+    }
+}

@@ -1,8 +1,6 @@
 import Api from "./api";
 export default class AuthService extends Api {
-    constructor() {
-        super();
-    }
+    
     async login(username: string, password: string) {
         const response = await this.post("/auth/login", {
             username,
@@ -19,11 +17,12 @@ export default class AuthService extends Api {
         setTimeout(async ()=> {
             const response = await this.get("/auth/reissueToken");
             if (response.success) {
+                console.log(response);
                 this.refreshToken(response.expiresIn);
             } else {
                 window.localStorage.setItem("authenticated", "false");
             }
-        }, expiry);
+        }, expiry - 1000);
     }
 
 }
