@@ -21,3 +21,7 @@ export interface TitleTextProps {
     title: string;
     text: string;
 }
+export interface ComponentType {
+    component_type_id: number;
+    component_type_name: string;
+}
