@@ -1,26 +1,28 @@
-import Api from "./api";
-export default class AuthService extends Api {
+import Api from './api';
+
+export default class AuthService {
     
-    async login(username: string, password: string) {
-        const response = await this.post("/auth/login", {
+    async login(username, password) {
+        const response = await Api.post('/auth/login', {
             username,
             password
         });
         if (response.success) {
-            window.localStorage.setItem("authenticated", "true");
+            window.localStorage.setItem('authenticated', 'true');
             this.refreshToken(response.expiresIn);
             return true;
         }
         return false;
     }
-    async refreshToken(expiry: number) {
+    //TODO
+    async refreshToken(expiry) {
         setTimeout(async ()=> {
-            const response = await this.get("/auth/reissueToken");
+            const response = await Api.get('/auth/reissueToken');
             if (response.success) {
                 console.log(response);
                 this.refreshToken(response.expiresIn);
             } else {
-                window.localStorage.setItem("authenticated", "false");
+                window.localStorage.setItem('authenticated', 'false');
             }
         }, expiry - 1000);
     }

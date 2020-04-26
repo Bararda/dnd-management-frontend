@@ -1,19 +1,21 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import {
     Route,
     Redirect,
-} from "react-router-dom";
+} from 'react-router-dom';
 
-const PrivateRoute: React.FC<any> = (props) => {
+function PrivateRoute(props) {
     return (
         <Route
             render={({ location }) =>
-                window.localStorage.getItem("authenticated") ? (
+                window.localStorage.getItem('authenticated') ? (
                     props.children
                 ) : (
                     <Redirect
                         to={{
-                            pathname: "/",
+                            pathname: '/',
                             state: { from: location }
                         }}
                     />
@@ -22,6 +24,8 @@ const PrivateRoute: React.FC<any> = (props) => {
         />
     );
 }
-
+PrivateRoute.propTypes = {
+    children: PropTypes.object
+};
 
 export default PrivateRoute;

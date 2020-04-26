@@ -1,15 +1,13 @@
 export default class Api {
 
-    private endPointURL = 'http://localhost:8080'
-
-    protected async get(endPoint: string, query: any = {}) {
-        const url = new URL(this.endPointURL + endPoint);
+    static async get(endPoint, query = {}) {
+        const url = new URL(Api.endPointURL + endPoint);
         Object.keys(query).forEach(key =>
             url.searchParams.append(key, query[key])
         );
         const response = await fetch(url.toString(), {
-            credentials: "include",
-            method: "GET",
+            credentials: 'include',
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -18,12 +16,10 @@ export default class Api {
         return data;
     }
 
-    protected async post(endPoint: string, obj: any) {
-
-        console.log(this.endPointURL, endPoint, obj);
-        const response = await fetch(this.endPointURL + endPoint, {
-            method: "POST",
-            credentials: "include",
+    static async post(endPoint, obj) {
+        const response = await fetch(Api.endPointURL + endPoint, {
+            method: 'POST',
+            credentials: 'include',
             body: JSON.stringify(obj),
             headers: {
                 'Content-Type': 'application/json',
@@ -32,16 +28,16 @@ export default class Api {
         return response.json();
     }
 
-    protected async put(endPoint: any, updates: any, query:any = {}) {
+    static async put(endPoint, updates , query = {}) {
 
-        const url = new URL(this.endPointURL + endPoint);
+        const url = new URL(Api.endPointURL + endPoint);
         Object.keys(query).forEach(key =>
             url.searchParams.append(key, query[key])
         );
         const response = await fetch(url.toString(), {
-            method: "PUT",
+            method: 'PUT',
             body: JSON.stringify(updates),
-            credentials: "include",
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -49,15 +45,15 @@ export default class Api {
         return response.json();
     }
 
-    protected async delete(endPoint: string, query: any = {}) {
+    static async delete(endPoint, query = {}) {
 
-        const url = new URL(this.endPointURL + endPoint);
+        const url = new URL(Api.endPointURL + endPoint);
         Object.keys(query).forEach(key =>
             url.searchParams.append(key, query[key])
         );
         const response = await fetch(url.toString(), {
-            method: "DELETE",
-            credentials: "include",
+            method: 'DELETE',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -65,3 +61,4 @@ export default class Api {
         return await response.json();
     }
 }
+Api.endPointURL = 'http://localhost:8080';

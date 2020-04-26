@@ -1,29 +1,29 @@
-import React, {useState} from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import "./login-form.css";
-import AuthService from "../../../utils/services/auth.service";
+import React, {useState} from 'react';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import './login-form.css';
+import AuthService from '../../../utils/services/auth.service';
 import {
     useHistory,
-  } from "react-router-dom";
+  } from 'react-router-dom';
 function LoginForm(props) {
 
     const [errorText, setErrorText] = useState('');
-    let history = useHistory();
+    const history = useHistory();
 
     const login = async () => {
-        let username = document.getElementById('username-input').value;
-        let password = document.getElementById('password-input').value;
+        const username = document.getElementById('username-input').value;
+        const password = document.getElementById('password-input').value;
         const authService = new AuthService();
 
         if(username && password) {
             if(await authService.login(username, password)) {
-                history.replace("/home");
+                history.replace('/home');
             }
         } else {
             setErrorText('Both Username and Password are Required!');
         }
-    }
+    };
 
     return (
         <Form>

@@ -1,22 +1,3 @@
-.title {
-    font-weight: bold;
-}
-.level {
-    font-weight: lighter;
-    font-style: italic;
-}
-.damage-types{
-    width: 200px;
-    padding: 10px;
-}
-.component-types {
-    display: flex;
-}
-
-.checkbox {
-    padding: 10px;
-    padding-left: 15px;
-}
 .header {
     display: flex;
 }

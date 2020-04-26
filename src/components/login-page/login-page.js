@@ -1,8 +1,8 @@
 import React from "react";
 import LoginForm from "./login-form/login-form";
-import "./main-page.css";
+import "./login-page.css";
 
-function MainPage() {
+function LoginPage() {
     return (
         <div id="main-page">
             <div id="logo-container">
@@ -22,4 +22,4 @@ function MainPage() {
     );
 }
 
-export default MainPage;
+export default LoginPage;

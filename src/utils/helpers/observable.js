@@ -1,16 +1,15 @@
 export default class Observable {
-    observers: Array<any>;
     constructor() {
         this.observers = [];
     }
 
-    attach(o: any) {
-        this.observers.push(o)
+    attach(o) {
+        this.observers.push(o);
     }
-    detach(o: any) {
+    detach(o) {
         this.observers = this.observers.filter(subscriber => subscriber !== o);
     }
-    notify(data: any) {
+    notify(data) {
         this.observers.forEach(o => o.update(data));
     }
 
