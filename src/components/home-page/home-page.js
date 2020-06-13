@@ -17,7 +17,8 @@ function HomePage() {
                     <Route path={'/home/characterSheetBuilder'}>
                        <CharacterSheetBuilder />
                     </Route>
-                    <Route path={'/home/'}>home</Route>
+                    <Route path={'/home/'}>Dnd Management App!
+                    </Route>
                 </Switch>
             </div>
         </div>

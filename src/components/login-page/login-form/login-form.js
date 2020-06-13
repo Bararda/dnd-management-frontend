@@ -25,16 +25,23 @@ function LoginForm(props) {
         }
     };
 
+    const checkEnterKey = (event) => {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            login();
+        }
+    };
+
     return (
         <Form>
             <h2>Login</h2>
             <Form.Group >
-                <Form.Label>Username</Form.Label>
+                <Form.Label className="hide-on-mobile" >Username</Form.Label>
                 <Form.Control id="username-input" type="text" placeholder="Username" />
             </Form.Group>
             <Form.Group >
-                <Form.Label>Password</Form.Label>
-                <Form.Control id="password-input" type="password" placeholder="Password" />
+                <Form.Label className="hide-on-mobile">Password</Form.Label>
+                <Form.Control id="password-input" onKeyUp={checkEnterKey} type="password" placeholder="Password" />
             </Form.Group>
             {errorText}
             <Button id="login-button" variant="danger" onClick={login}>
