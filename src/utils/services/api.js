@@ -12,8 +12,14 @@ export default class Api {
                 'Content-Type': 'application/json',
             },
         });
-        const data = await response.json();
-        return data;
+
+        if(response.status === 401) {
+            window.location.assign(window.location.origin + '/');
+        } else {
+            const data = await response.json();
+            return data;
+        }
+
     }
 
     static async post(endPoint, obj) {
@@ -25,7 +31,11 @@ export default class Api {
                 'Content-Type': 'application/json',
             },
         });
-        return response.json();
+        if(response.status === 401) {
+            window.location.assign(window.location.origin + '/');
+        } else {
+            return await response.json();
+        }
     }
 
     static async put(endPoint, updates , query = {}) {
@@ -42,8 +52,11 @@ export default class Api {
                 'Content-Type': 'application/json',
             },
         });
-        return response.json();
-    }
+        if(response.status === 401) {
+            window.location.assign(window.location.origin + '/');
+        } else {
+            return await response.json();
+        }    }
 
     static async delete(endPoint, query = {}) {
 
@@ -58,7 +71,11 @@ export default class Api {
                 'Content-Type': 'application/json',
             },
         });
-        return await response.json();
+        if(response.status === 401) {
+            window.location.assign(window.location.origin + '/');
+        } else {
+            return await response.json();
+        }    
     }
 }
 Api.endPointURL = 'http://localhost:8080';

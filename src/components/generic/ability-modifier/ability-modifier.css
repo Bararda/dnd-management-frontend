@@ -1,0 +1,46 @@
+.ability-modifier {
+    background-color: transparent;
+    border: none;
+    width: max-content;
+    position: relative;
+}
+.ability-modifier-top {
+    border: 1px solid black;
+    width: 80px;
+    height: 80px;
+    text-align: center;
+    font-size: 30px;
+}
+
+.ability-modifier-bottom {
+    top: -10px;
+    border: 1px solid black;
+    width: 30px;
+    margin: auto;
+    display: block;
+    text-align: center;
+    position: relative;
+}
+
+.modifier-name {
+    position: absolute;
+    color: black;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    width: 100%;
+    border: 1px solid black;
+    border-bottom: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; 
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}

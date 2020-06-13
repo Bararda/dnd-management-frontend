@@ -1,3 +1,38 @@
 .header {
     display: flex;
 }
+
+.filter {
+    margin-bottom: 5%;
+}
+
+.component-types-grid {
+    grid-area: advanced;
+}
+
+.damage-types-grid {
+    grid-area: damage;
+}
+
+.class-list-grid {
+    grid-area: class;
+}
+
+.level-list-grid {
+    grid-area: level;
+}
+
+.filter-options-container {
+    display: grid;
+    grid-template-rows: 50% 50%;
+    grid-template-columns: 50% 50%;
+    grid-template-areas: 
+    "class level"
+    "advanced advanced"
+}
+
+.advanced-grid {
+    display: grid;
+	grid-template-columns: max-content 1fr;
+	width: 100%;
+}

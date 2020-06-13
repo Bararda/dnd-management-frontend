@@ -1,9 +1,7 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import HomePage from './components/home-page/home-page';
-import Spells from './components/spells/spells';
-import PrivateRoute from './components/private-route/private-route';
+import { HomePage, PrivateRoute } from './components';
 import LoginPage from './components/login-page/login-page';
 import {
   BrowserRouter as Router,
@@ -16,9 +14,6 @@ function App() {
         <div id="app">
             <Router>
                 <Switch>
-                    <PrivateRoute path="/spells">
-                        <Spells />
-                    </PrivateRoute>
                     <PrivateRoute path="/home">
                         <HomePage />
                     </PrivateRoute>

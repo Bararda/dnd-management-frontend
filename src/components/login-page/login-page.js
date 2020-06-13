@@ -1,6 +1,6 @@
-import React from "react";
-import LoginForm from "./login-form/login-form";
-import "./login-page.css";
+import React from 'react';
+import LoginForm from './login-form/login-form';
+import './login-page.css';
 
 function LoginPage() {
     return (
@@ -9,7 +9,7 @@ function LoginPage() {
                 <div id="logo-text">
 
                     <img
-                        src={require("../../assets/images/d20.svg")}
+                        src={require('../../assets/images/d20.svg')}
                         id="logo"
                         alt="d20"
                     />

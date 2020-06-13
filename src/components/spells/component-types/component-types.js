@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Form from 'react-bootstrap/Form';
 import PropTypes from 'prop-types';
-
-
+import './component-types.css';
+// TODO add state into component
 export default function ComponentTypes(props) {
     return (
         <div className='component-types'>
@@ -14,10 +14,11 @@ export default function ComponentTypes(props) {
                         className="checkbox"
                         onChange={props.onChange}
                         value={ct.component_type_name}
-                        label={ct.component_type_name}
+                        label={ct.component_type_name.charAt(0).toUpperCase()}
                         checked={props.filter.includes(
                             ct.component_type_name
                         )}
+                        inline
                     />
                 );
             })}

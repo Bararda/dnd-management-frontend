@@ -1,0 +1,9 @@
+@media print {
+    .print-button {
+        display: none;
+    }
+  }
+
+.print-workspace {
+    display: none;
+}

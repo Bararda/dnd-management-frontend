@@ -1,0 +1,12 @@
+.class-list {
+	text-align: center;
+	overflow: hidden;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	width: 100%;
+}
+
+.class-list select {
+	margin: 5px -20px -5px -5px;
+
+}

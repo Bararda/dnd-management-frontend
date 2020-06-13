@@ -1,10 +1,11 @@
 import React from 'react';
 import NavBar from '../../core/nav-bar/nav-bar';
-import Spells from '../spells/spells';
+import { Spells, CharacterSheetBuilder } from '../';
 import { Switch, Route } from 'react-router-dom';
 import './home-page.css';
 
 function HomePage() {
+    // Order matters. Will route to the first route that matches.
     return (
         <div>
             <NavBar></NavBar>
@@ -13,7 +14,10 @@ function HomePage() {
                     <Route path={'/home/spells'}>
                         <Spells />
                     </Route>
-                    <Route path='/home/'>home</Route>
+                    <Route path={'/home/characterSheetBuilder'}>
+                       <CharacterSheetBuilder />
+                    </Route>
+                    <Route path={'/home/'}>home</Route>
                 </Switch>
             </div>
         </div>

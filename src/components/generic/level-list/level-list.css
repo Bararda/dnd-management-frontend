@@ -1,0 +1,15 @@
+.level-list {
+	text-align: center;
+	overflow: hidden;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	width: 100%;
+}
+
+.level-list .level-select {
+	margin: 10px -20px -5px -5px;
+}
+
+.level-list-header {
+	display: block;
+}

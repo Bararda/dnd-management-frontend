@@ -6,5 +6,6 @@ export default class SpellService {
         const spells = await Api.get(SpellService.route, query);
         return spells;
     }
+    
 }
 SpellService.route = '/spells';

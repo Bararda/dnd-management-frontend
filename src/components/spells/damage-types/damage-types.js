@@ -2,7 +2,7 @@ import Form from 'react-bootstrap/Form';
 import React, { useState, useEffect } from 'react';
 import { DamageTypeService } from '../../../utils/services';
 import PropTypes from 'prop-types';
-
+import './damage-types.css';
 export default function DamageTypes(props) {
 
     const [damageTypeList, setDamageTypes] = useState({});
@@ -37,6 +37,7 @@ export default function DamageTypes(props) {
                     props.onChange(ev);
                 }}
                 style={{ backgroundColor: selectColor }}
+                bsPrefix='form-control damage-type-select'
             >
                 <option value="0" style={{ backgroundColor: 'white' }}>
                     None

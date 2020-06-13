@@ -8,8 +8,11 @@ function NavBar() {
     return (
         <Navbar className="nav-bar">
             <NavLogo><img src={require('../../assets/images/dnd_logo.svg')} className="nav-logo" alt="dnd"/></NavLogo>
-            <NavItem href="home">Home</NavItem>
+            <Nav.Item>
+                <Nav.Link href={'/home/'}>Home</Nav.Link>
+            </Nav.Item>
             <NavItem href="spells">Spells</NavItem>
+            <NavItem href="characterSheetBuilder">Character Sheet Builder</NavItem>
         </Navbar>
     );
 }
