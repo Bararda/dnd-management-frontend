@@ -2,20 +2,19 @@ import Api from './api';
 
 export default class AuthService {
     
-    async login(username, password) {
+    static async login(username, password) {
         const response = await Api.post('/auth/login', {
             username,
             password
         });
         if (response.success) {
             window.localStorage.setItem('authenticated', 'true');
-            this.refreshToken(response.expiresIn);
             return true;
         }
         return false;
     }
     //TODO
-    async refreshToken(expiry) {
+    static async refreshToken(expiry) {
         setTimeout(async ()=> {
             const response = await Api.get('/auth/reissueToken');
             if (response.success) {
@@ -25,6 +24,12 @@ export default class AuthService {
                 window.localStorage.setItem('authenticated', 'false');
             }
         }, expiry - 1000);
+    }
+
+    static async logout() {
+        const response = await Api.delete('/auth/logout');
+        window.localStorage.setItem('authenticated', 'false');
+        window.location.assign(window.location.origin + '/');
     }
 
 }

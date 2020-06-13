@@ -3,16 +3,32 @@
     background-color: #283069;
     height: 50px;
 }
-.nav-item > .nav-link {
+
+.nav-item > .nav-link, .navbar-light .navbar-nav .nav-link {
     color: white;
     padding: 10px;
 }
 
-.nav-item > .nav-link:hover {
+.nav-item > .nav-link:hover, .navbar-light .navbar-nav .nav-link:hover {
     color: white;
     text-decoration: underline;
 }
+
 .nav-logo {
     width: 75px;
-    
+}
+
+.nav-dropdown {
+    justify-content: flex-end;
+    flex-basis: auto;
+    display: flex;
+}
+
+.nav-dropdown-button {
+    background-color: #4b6599;
+    border:none;
+}
+
+.bg-blue {
+    background-color: #283069;
 }

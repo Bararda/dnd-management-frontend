@@ -22,7 +22,7 @@ export default class Api {
 
     }
 
-    static async post(endPoint, obj) {
+    static async post(endPoint, obj = {}) {
         const response = await fetch(Api.endPointURL + endPoint, {
             method: 'POST',
             credentials: 'include',
@@ -56,7 +56,8 @@ export default class Api {
             window.location.assign(window.location.origin + '/');
         } else {
             return await response.json();
-        }    }
+        }    
+    }
 
     static async delete(endPoint, query = {}) {
 

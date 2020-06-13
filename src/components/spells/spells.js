@@ -166,7 +166,6 @@ function Spells(props) {
 				return level !== value;
 			});
 		}
-		console.log(selectedValues);
 		setClassFilter([...selectedValues]);
 	};
 

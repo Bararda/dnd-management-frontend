@@ -4,7 +4,6 @@ import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 
 export default function EasyAccordion(props) {
-    console.log(props.alwaysOpen? 1 : 0);
     let button = (
         <Accordion.Toggle as={Card.Header} eventKey={0}>
             {props.title}

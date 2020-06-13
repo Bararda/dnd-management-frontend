@@ -12,12 +12,12 @@ function LoginForm(props) {
     const history = useHistory();
 
     const login = async () => {
+        //TODO change to react refs
         const username = document.getElementById('username-input').value;
         const password = document.getElementById('password-input').value;
-        const authService = new AuthService();
 
         if(username && password) {
-            if(await authService.login(username, password)) {
+            if(await AuthService.login(username, password)) {
                 history.replace('/home');
             }
         } else {

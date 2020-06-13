@@ -10,7 +10,7 @@ function PrivateRoute(props) {
     return (
         <Route
             render={({ location }) =>
-                window.localStorage.getItem('authenticated') ? (
+                window.localStorage.getItem('authenticated') === 'true' ? (
                     props.children
                 ) : (
                     <Redirect
