@@ -13,7 +13,7 @@ import DamageTypes from './damage-types/damage-types';
 import LevelList from '../generic/level-list/level-list';
 import ClassList from '../generic/class-list/class-list';
 import EasyAccorion from '../generic/easy-accordion/easy-accordion';
-
+import SearchBox from '../generic/search-box/search-box';
 /**
  * A component that lists the spells
  * @param {React.Props} props
@@ -21,6 +21,7 @@ import EasyAccorion from '../generic/easy-accordion/easy-accordion';
 function Spells(props) {
 	const [damageTypeList, setDamageTypes] = useState({});
 	const [spellList, setSpellList] = useState([]);
+	const [textFilter, setTextFilter] = useState('');
 	const [damageTypeFilter, setDamageTypeFilter] = useState('0');
 	const [componentTypeFilter, setComponentTypeFilter] = useState([]);
 	const [levelFilter, setLevelFilter] = useState([]);
@@ -75,15 +76,30 @@ function Spells(props) {
 	};
 
 	/**
-	 * Filters the spell list based on the damageTypeFilter and componentTypeFilter
+	 * Filters the spell list
 	 */
 	const filterSpells = () => {
 		let visibleSpells = spellList;
+		visibleSpells = filterByDamageType(visibleSpells);
+		visibleSpells = filterByComponentTypes(visibleSpells);
+		visibleSpells = filterByLevel(visibleSpells);
+		visibleSpells = filterByClass(visibleSpells);
+		visibleSpells = filterBySearchBox(visibleSpells);
+		setVisibleSpellList(visibleSpells);
+	};
+
+	const filterByDamageType = (visibleSpells) => {
 		if (isNaN(damageTypeFilter)) {
-			visibleSpells = spellList.filter((spell) => {
+			// 0n^2 slow
+			visibleSpells = visibleSpells.filter((spell) => {
 				return spell.damage_types.includes(damageTypeFilter);
 			});
 		}
+		return visibleSpells;
+	};
+
+	const filterByComponentTypes = (visibleSpells) => {
+		// 0n^2 slow
 		visibleSpells = visibleSpells.filter((spell) => {
 			for (const compType of spell.component_types) {
 				if (!componentTypeFilter.includes(compType)) {
@@ -92,14 +108,22 @@ function Spells(props) {
 			}
 			return true;
 		});
+		return visibleSpells;
+	};
+
+	const filterByLevel = (visibleSpells) => {
+		// 0n^2 slow
 		visibleSpells = visibleSpells.filter((spell) => {
 			if (levelFilter.length === 0) {
 				return true;
 			}
 			return levelFilter.includes(spell.spell_level);
 		});
+		return visibleSpells;
+	};
 
-		// ON^2 fix with hash map
+	const filterByClass = (visibleSpells) => {
+		// 0n^2 slow
 		visibleSpells = visibleSpells.filter((spell) => {
 			if (classFilter.length === 0) {
 				return true;
@@ -109,17 +133,31 @@ function Spells(props) {
 					return true;
 				}
 			}
+			return false;
 		});
+		return visibleSpells;
+	};
 
-		setVisibleSpellList(visibleSpells);
+	const filterBySearchBox = (visibleSpells) => {
+		// 0n^2 slow
+		visibleSpells = visibleSpells.filter((spell) => {
+			if (textFilter === '') {
+				return true;
+			}
+			if (spell.spell_name.toLowerCase().indexOf(textFilter) !== -1) {
+				return true;
+			}
+			return false;
+		});
+		return visibleSpells;
 	};
 
 	/**
 	 * Sets the DamageTypeFilter which calls filterSpells
 	 * @param {Event} event
 	 */
-	const filterByDamageType = (event) => {
-		const dt = event.target.value;
+	const setFilteredDamageType = (event) => {
+		const dt = event.target.value.toLowerCase();
 		setDamageTypeFilter(dt);
 	};
 
@@ -127,7 +165,7 @@ function Spells(props) {
 	 * Sets the componentTypeFilter which calls filterSpells
 	 * @param {Event} event
 	 */
-	const filterComponentType = (event) => {
+	const setFilteredComponentType = (event) => {
 		let list = componentTypeFilter;
 		if (!list.includes(event.target.value)) {
 			list[list.length] = event.target.value;
@@ -139,34 +177,21 @@ function Spells(props) {
 		setComponentTypeFilter([...list]);
 	};
 
+	const searchSpells = (ev) => {
+		const searchText = ev.target.value.toLowerCase();
+		setTextFilter(searchText);
+	};
+
 	/**
 	 * gets the selected elements in the level select box and sets the level filter
 	 * @param {*} event
 	 */
-	const filterByLevel = (event) => {
-		let selectedValues = levelFilter;
-		const value = parseInt(event.target.value, 10);
-		if (event.target.checked) {
-			selectedValues.push(value);
-		} else {
-			selectedValues = selectedValues.filter((level) => {
-				return level !== value;
-			});
-		}
-		setLevelFilter([...selectedValues]);
+	const setFilteredLevels = (levels) => {
+		setLevelFilter([...levels]);
 	};
 
-	const filterByClass = (event) => {
-		let selectedValues = classFilter;
-		const value = event.target.value;
-		if (event.target.checked) {
-			selectedValues.push(value);
-		} else {
-			selectedValues = selectedValues.filter((level) => {
-				return level !== value;
-			});
-		}
-		setClassFilter([...selectedValues]);
+	const setFilteredClasses = (classes) => {
+		setClassFilter([...classes]);
 	};
 
 	/**
@@ -182,10 +207,12 @@ function Spells(props) {
 		componentTypeFilter,
 		levelFilter,
 		classFilter,
+		textFilter,
 	]);
 
 	return (
 		<div>
+			<SearchBox onChange={searchSpells}></SearchBox>
 			<div className="filter">
 				<div className="filter-options-container">
 					<div className="component-types-grid">
@@ -194,23 +221,22 @@ function Spells(props) {
 								<span>Component Types</span>
 								<span>Damage Types</span>
 								<ComponentTypes
-									onChange={filterComponentType}
+									onChange={setFilteredComponentType}
 									filter={componentTypeFilter}
 									componentTypeList={componentTypeList}
 								/>
-								<DamageTypes onChange={filterByDamageType} />
+								<DamageTypes onChange={setFilteredDamageType} />
 							</div>
 						</EasyAccorion>
 					</div>
-					<div className="damage-types-grid">
-					</div>
+					<div className="damage-types-grid"></div>
 					<div className="level-list-grid">
 						<EasyAccorion
 							title="Level"
 							alwaysOpen={true}
 							defaultOpen={true}
 						>
-							<LevelList onChange={filterByLevel} />
+							<LevelList onChange={setFilteredLevels} />
 						</EasyAccorion>
 					</div>
 					<div className="class-list-grid">
@@ -219,7 +245,7 @@ function Spells(props) {
 							alwaysOpen={true}
 							defaultOpen={true}
 						>
-							<ClassList onChange={filterByClass} />
+							<ClassList onChange={setFilteredClasses} />
 						</EasyAccorion>
 					</div>
 				</div>

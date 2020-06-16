@@ -79,4 +79,6 @@ export default class Api {
         }    
     }
 }
-Api.endPointURL = 'http://10.0.0.10:8080';
+// Api.endPointURL = 'http://localhost:8080';
+Api.endPointURL = 'https://dnd.management:8080';
+// Api.endPointURL = 'http://10.0.0.10:8080';

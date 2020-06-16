@@ -2,7 +2,7 @@ import React from 'react';
 import LoginForm from './login-form/login-form';
 import './login-page.css';
 
-function LoginPage() {
+function LoginPage(props) {
     return (
         <div id="main-page">
             <div id="logo-container">

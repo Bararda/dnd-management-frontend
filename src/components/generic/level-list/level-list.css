@@ -13,3 +13,22 @@
 .level-list-header {
 	display: block;
 }
+.show-on-mobile {
+	display: none;
+}
+
+.level-select {
+	width: 100%;
+}
+
+@media only screen and (max-width: 755px) {
+
+    .hidden-on-mobile {
+        display: none;
+	}
+	
+	.show-on-mobile {
+        display: inline-block;
+    }
+
+}

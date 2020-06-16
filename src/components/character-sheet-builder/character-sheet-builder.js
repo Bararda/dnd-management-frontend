@@ -5,8 +5,8 @@ import Workspace from './workspace/workspace';
 import ControlPanel from './control-panel/control-panel';
 import ReactToPrint from 'react-to-print';
 import './character-sheet-builder.css';
-import border1 from '../../assets/images/aaaa.webp';
-import border2 from '../../assets/images/celtic-border.png';
+// import border1 from '../../assets/images/aaaa.webp';
+// import border2 from '../../assets/images/celtic-border.png';
 import border3 from '../../assets/images/olala.png';
 export default function CharacterSheetBuilder(props) {
 	// hard coded because idk how to get these yet - only works in 1920 x 1080
@@ -23,7 +23,6 @@ export default function CharacterSheetBuilder(props) {
 	const [printComponents, setPrintComponents] = useState([]);
 
 	const setWorkspaceBounds = () => {
-		console.log(border3);
 		const workspaceElement = workspaceRef.current;
 		const rect = workspaceElement.getBoundingClientRect();
 		setWorkspaceOffsetX(rect.left + boundingRectOffset);
@@ -77,7 +76,6 @@ export default function CharacterSheetBuilder(props) {
 	const cloneChildren = draggable => {
 		const children = React.Children.map(draggable.props.children, (child, i) => {
 			const element = child.ref.current;
-			console.log(element.style.cssText);
 			const newRef = React.createRef();
 			// may need to change if I ever need to overwrite other element style properties
 			const clone = React.cloneElement(child, {ref: newRef, styleString: element.style.cssText});

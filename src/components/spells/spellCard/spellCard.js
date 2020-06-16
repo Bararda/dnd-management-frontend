@@ -3,7 +3,7 @@ import TitleText from '../../generic/titleText/titleText';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import PropTypes from 'prop-types';
-
+import './spellCard.css';
 function SpellCard(props) {
     let borderColor = '#1F1F20';
 
@@ -42,18 +42,22 @@ function SpellCard(props) {
                     ></TitleText>
                     <TitleText
                         title="Duration"
-                        text={props.spell.duration}
+                        text={`${props.spell.concentration? 'Concentration, ': ''} ${props.spell.duration}`}
                     ></TitleText>
                     <TitleText
                         title="Classes"
                         text={props.spell.classes.join(', ')}
                     ></TitleText>
-                    {props.spell.description}
+                    <div className="spell-description">
+                        {props.spell.description}
+                    </div>
                     {props.spell.higher_level && (
-                        <TitleText
-                            title="Higher Levels"
-                            text={props.spell.higher_level}
-                        ></TitleText>
+                        <div className="higher-levels">
+                            <TitleText
+                                title="Higher Levels"
+                                text={props.spell.higher_level}
+                            ></TitleText>
+                        </div>
                     )}
                 </Card.Body>
             </Accordion.Collapse>
