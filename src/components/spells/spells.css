@@ -23,6 +23,10 @@
     grid-area: level;
 }
 
+.spell-book-grid {
+    grid-area: spellBook;
+}
+
 .filter-options-container {
     display: grid;
     grid-template-rows: auto auto;
@@ -30,6 +34,7 @@
     grid-template-areas: 
     "class level"
     "advanced advanced"
+    "spellBook spellBook"
 }
 
 .advanced-grid {

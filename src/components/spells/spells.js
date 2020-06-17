@@ -4,6 +4,7 @@ import {
 	SchoolService,
 	DamageTypeService,
 	ComponentTypeService,
+	SpellBookSpellService
 } from '../../utils/services';
 import Accordion from 'react-bootstrap/Accordion';
 import './spells.css';
@@ -14,6 +15,8 @@ import LevelList from '../generic/level-list/level-list';
 import ClassList from '../generic/class-list/class-list';
 import EasyAccorion from '../generic/easy-accordion/easy-accordion';
 import SearchBox from '../generic/search-box/search-box';
+import SpellBookManager from '../spell-books/spell-book-manager/spell-book-manager';
+
 /**
  * A component that lists the spells
  * @param {React.Props} props
@@ -26,6 +29,7 @@ function Spells(props) {
 	const [componentTypeFilter, setComponentTypeFilter] = useState([]);
 	const [levelFilter, setLevelFilter] = useState([]);
 	const [classFilter, setClassFilter] = useState([]);
+	const [spellBookFilter, setSpellBookFilter] = useState(false);
 	const [schoolList, setSchoolList] = useState({});
 	const [componentTypeList, setComponentTypes] = useState([]);
 	const [visibleSpellList, setVisibleSpellList] = useState([]);
@@ -85,7 +89,9 @@ function Spells(props) {
 		visibleSpells = filterByLevel(visibleSpells);
 		visibleSpells = filterByClass(visibleSpells);
 		visibleSpells = filterBySearchBox(visibleSpells);
-		setVisibleSpellList(visibleSpells);
+		filterBySpellBook(visibleSpells).then(visibleSpells => {
+			setVisibleSpellList(visibleSpells);
+		});
 	};
 
 	const filterByDamageType = (visibleSpells) => {
@@ -152,6 +158,19 @@ function Spells(props) {
 		return visibleSpells;
 	};
 
+	const filterBySpellBook = async (visibleSpells) => {
+		if(spellBookFilter) {
+			const spellBookSpells = await SpellBookSpellService.get({spell_book_id: spellBookFilter});
+			const spellBookSpellIds = spellBookSpells.map(sbs => sbs.spell_id);
+			console.log(spellBookSpells);
+			visibleSpells = visibleSpells.filter((spell) => {
+				return spellBookSpellIds.includes(spell.spell_id);
+			});
+
+		}
+		return visibleSpells;
+	};
+
 	/**
 	 * Sets the DamageTypeFilter which calls filterSpells
 	 * @param {Event} event
@@ -194,6 +213,10 @@ function Spells(props) {
 		setClassFilter([...classes]);
 	};
 
+	const setFilteredSpellbook = (spellBookID) => {
+		setSpellBookFilter(spellBookID);
+	};
+
 	/**
 	 * Initial loading for the component
 	 */
@@ -208,6 +231,7 @@ function Spells(props) {
 		levelFilter,
 		classFilter,
 		textFilter,
+		spellBookFilter
 	]);
 
 	return (
@@ -248,6 +272,11 @@ function Spells(props) {
 							<ClassList onChange={setFilteredClasses} />
 						</EasyAccorion>
 					</div>
+					<div className="spell-book-grid">
+						<EasyAccorion title="Spell Books">
+							<SpellBookManager callback={setFilteredSpellbook}></SpellBookManager>
+						</EasyAccorion>
+					</div>
 				</div>
 			</div>
 			<Accordion defaultActiveKey="0">
@@ -258,6 +287,7 @@ function Spells(props) {
 							spell={spell}
 							schoolList={schoolList}
 							damageTypeList={damageTypeList}
+							filterSpells={filterSpells}
 						></SpellCard>
 					);
 				})}

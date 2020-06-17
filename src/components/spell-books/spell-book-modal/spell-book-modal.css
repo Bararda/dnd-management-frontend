@@ -1,0 +1,29 @@
+.spell-book-modal-button {
+    background: none;
+    border: none;
+    border-bottom: 1px solid #6d6d70;
+    width: 100%;
+    text-align: left;
+}
+@media only screen and (prefers-color-scheme: dark) {
+    .spell-book-modal {
+        background-color: #242425;
+        color: white;
+        border-bottom: 1px solid rgba(0,0,0,.125);
+        border-top: 1px solid rgba(0,0,0,.125);
+    }
+    .modal-header {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    .modal-footer {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    .close, .close:hover {
+        color: white;
+    }
+    .spell-book-modal-button {
+        color: white;
+    }
+}

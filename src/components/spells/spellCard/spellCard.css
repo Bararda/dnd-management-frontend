@@ -11,5 +11,8 @@
 
 .higher-levels {
     margin-top: 10px;
+}
 
+.spell-book-toggle{
+    float: right;
 }
