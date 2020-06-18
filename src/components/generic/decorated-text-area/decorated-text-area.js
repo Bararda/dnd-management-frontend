@@ -9,7 +9,6 @@ const DecoratedTextArea = React.forwardRef(function DecoratedTextArea(props, ref
      */
     const addStyleString = () => {
         if(ref) {
-            console.log(props.styleString);
             ref.current.style = props.styleString;
         }
     };

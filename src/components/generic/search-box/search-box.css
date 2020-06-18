@@ -1,0 +1,33 @@
+.search-box {
+	background: none;
+    color: #bfbeba;
+    border: none;
+    margin-left: 10px;
+}
+
+.search-box-container {
+    background-color: #3b3b3d;
+	width: 100%;
+    background: none;
+    border-bottom: 1px solid #6d6d70;
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    margin: 5px;
+    margin-bottom: 15px;
+}
+
+#search-icon {
+    color: #bfbeba;
+    margin: 2px;
+    margin-left: 10px;
+    width: 20px;
+}
+
+.search-box::placeholder {
+    color: #bfbeba;
+}
+
+.search-box:focus {
+    border: none;
+    outline: none;
+}

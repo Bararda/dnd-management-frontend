@@ -43,4 +43,10 @@
         width: 100%;
         margin: 0px;
     }
-  }
+    #login-form-container {
+        padding-top: 0px;
+    }
+    .hide-on-mobile {
+        display: none;
+    }
+}

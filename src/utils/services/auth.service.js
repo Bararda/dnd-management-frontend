@@ -8,6 +8,7 @@ export default class AuthService {
             password
         });
         if (response.success) {
+            AuthService.refreshToken(parseInt(response.expiresIn));
             window.localStorage.setItem('authenticated', 'true');
             return true;
         }
@@ -18,8 +19,7 @@ export default class AuthService {
         setTimeout(async ()=> {
             const response = await Api.get('/auth/reissueToken');
             if (response.success) {
-                console.log(response);
-                this.refreshToken(response.expiresIn);
+                AuthService.refreshToken(response.expiresIn);
             } else {
                 window.localStorage.setItem('authenticated', 'false');
             }
@@ -27,7 +27,7 @@ export default class AuthService {
     }
 
     static async logout() {
-        const response = await Api.delete('/auth/logout');
+        await Api.delete('/auth/logout');
         window.localStorage.setItem('authenticated', 'false');
         window.location.assign(window.location.origin + '/');
     }

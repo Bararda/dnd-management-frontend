@@ -1,0 +1,53 @@
+.spell-book-manager {
+	display: grid;
+	grid-template-rows: auto auto auto;
+	grid-template-columns: 15% 15% 70%;
+	gap: 10px 30px;
+	grid-template-areas:
+		'select select description'
+		'name name description'
+		'save save description'
+		'delete delete description';
+	margin: 10px;
+	margin-right: 70px;
+}
+
+.spell-book-desc {
+	width: 100%;
+	grid-area: description;
+}
+
+.spell-book-name {
+	grid-area: name;
+}
+
+.spell-book-select {
+	grid-area: select;
+}
+
+.spell-book-save {
+	grid-area: save;
+}
+
+.spell-book-delete {
+	grid-area: delete;
+}
+
+.spells-container {
+	margin-bottom: 100px;
+}
+
+@media only screen and (max-width: 755px) {
+	.spell-book-manager {
+		grid-template-areas:
+			'select select select'
+			'name name name'
+			'description description description'
+			'save save save'
+			'delete delete delete';
+	}
+
+	.show-on-mobile {
+		display: inline-block;
+	}
+}

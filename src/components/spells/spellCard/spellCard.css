@@ -1,4 +1,18 @@
 .level {
     font-weight: lighter;
     font-style: italic;
+    font-size: .9rem;
+}
+
+.spell-description {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.higher-levels {
+    margin-top: 10px;
+}
+
+.spell-book-toggle{
+    float: right;
 }
