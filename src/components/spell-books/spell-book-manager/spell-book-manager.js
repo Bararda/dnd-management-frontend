@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import { SelectBox } from '../../generic';
 import Form from 'react-bootstrap/Form';
 import PropTypes from 'prop-types';
-
+import './spell-book-manager.css';
 // TODO add state into component
 export default function SpellBookManager(props) {
     const [spellBookList, setSpellBookList] = useState([]);
@@ -91,11 +91,13 @@ export default function SpellBookManager(props) {
 
     return (
         <div className='spell-book-manager'>
-           <SelectBox list={genericSpellBookList} noneOption={true} onChange={applySpellBook} value={`${currentSpellBookID}`}></SelectBox>
-           <Form.Control type="text" placeholder="Spell Book Name" value={spellBookName} onChange={updateName}></Form.Control>
-           <Form.Control as="textarea" placeholder="Spell Book Description" rows="3" value={spellBookDescription} onChange={updateDescription}></Form.Control>
-           <Button onClick={saveSpellBook}>Save</Button>
-           <Button onClick={deleteSpellBook}>Delete</Button>
+           <div className="spell-book-select">
+                <SelectBox list={genericSpellBookList} noneOption={true} onChange={applySpellBook} value={`${currentSpellBookID}`}></SelectBox>
+           </div>
+           <Form.Control className="spell-book-name" type="text" placeholder="Spell Book Name" value={spellBookName} onChange={updateName}></Form.Control>
+           <Form.Control className="spell-book-desc" as="textarea" placeholder="Spell Book Description" rows="3" value={spellBookDescription} onChange={updateDescription}></Form.Control>
+           <Button className="spell-book-save" variant="outline-success" onClick={saveSpellBook}>Save</Button>
+           <Button className="spell-book-delete" variant="outline-danger" onClick={deleteSpellBook}>Delete</Button>
         </div>
     );
 }

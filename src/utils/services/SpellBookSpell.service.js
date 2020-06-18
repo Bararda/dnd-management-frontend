@@ -8,9 +8,14 @@ export default class SpellBookSpellService {
     }
 
     static async post(body) {
-        const spellBooks = await Api.post(SpellBookSpellService.route, body);
-        return spellBooks;
+        const insertID = await Api.post(SpellBookSpellService.route, body);
+        return insertID;
     }
     
+    static async delete(query) {
+        const affectedRows = await Api.delete(SpellBookSpellService.route, query);
+        return affectedRows;
+    }
+
 }
 SpellBookSpellService.route = '/spellbookspells';

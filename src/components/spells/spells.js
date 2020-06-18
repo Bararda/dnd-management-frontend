@@ -235,7 +235,7 @@ function Spells(props) {
 	]);
 
 	return (
-		<div>
+		<div className="spells-container">
 			<SearchBox onChange={searchSpells}></SearchBox>
 			<div className="filter">
 				<div className="filter-options-container">
