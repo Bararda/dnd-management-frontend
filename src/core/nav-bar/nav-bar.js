@@ -24,6 +24,9 @@ function NavBar() {
 					<NavItem href="characterSheetBuilder">
 						Character Sheet Builder
 					</NavItem>
+					<NavItem href="inventoryManager">
+						Inventory Manager
+					</NavItem>
 
 				</Nav>
                 <Nav>

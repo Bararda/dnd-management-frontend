@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import {
 	SpellService,
-	SchoolService,
-	DamageTypeService,
 	ComponentTypeService,
-	SpellBookSpellService
+	SpellBookSpellService,
 } from '../../utils/services';
-import Accordion from 'react-bootstrap/Accordion';
 import './spells.css';
-import SpellCard from './spellCard/spellCard';
 import ComponentTypes from './component-types/component-types';
 import DamageTypes from './damage-types/damage-types';
 import LevelList from '../generic/level-list/level-list';
@@ -16,13 +12,13 @@ import ClassList from '../generic/class-list/class-list';
 import EasyAccorion from '../generic/easy-accordion/easy-accordion';
 import SearchBox from '../generic/search-box/search-box';
 import SpellBookManager from '../spell-books/spell-book-manager/spell-book-manager';
+import SpellList from './spell-list/spell-list';
 
 /**
  * A component that lists the spells
  * @param {React.Props} props
  */
 function Spells(props) {
-	const [damageTypeList, setDamageTypes] = useState({});
 	const [spellList, setSpellList] = useState([]);
 	const [textFilter, setTextFilter] = useState('');
 	const [damageTypeFilter, setDamageTypeFilter] = useState('0');
@@ -30,7 +26,6 @@ function Spells(props) {
 	const [levelFilter, setLevelFilter] = useState([]);
 	const [classFilter, setClassFilter] = useState([]);
 	const [spellBookFilter, setSpellBookFilter] = useState(false);
-	const [schoolList, setSchoolList] = useState({});
 	const [componentTypeList, setComponentTypes] = useState([]);
 	const [visibleSpellList, setVisibleSpellList] = useState([]);
 
@@ -39,10 +34,8 @@ function Spells(props) {
 	 */
 	const loadSpellListData = () => {
 		Promise.all([
-			SchoolService.getSchools(),
 			SpellService.getSpells(),
 			ComponentTypeService.getComponentTypes(),
-			DamageTypeService.getDamageTypes(),
 		]).then(initializeSpellList);
 	};
 
@@ -50,29 +43,12 @@ function Spells(props) {
 	 * Initially sets the react components state. Called on inital load
 	 * @param {Array} dataList list of data objects returned from loading the spell list data
 	 */
-	const initializeSpellList = ([
-		schools,
-		spells,
-		componentTypes,
-		damageTypes,
-	]) => {
-		const schoolObj = {};
-		for (const school of schools) {
-			schoolObj[school.school_id] = school.school_name;
-		}
-
+	const initializeSpellList = ([spells, componentTypes]) => {
 		const list = [];
 		for (const compType of componentTypes) {
 			list.push(compType.component_type_name);
 		}
-		const typeObj = {};
 
-		//convert the list to a hash map for quicker lookup
-		for (const type of damageTypes) {
-			typeObj[type.damage_type_id] = type.damage_type_name;
-		}
-		setDamageTypes(typeObj);
-		setSchoolList(schoolObj);
 		setVisibleSpellList(spells);
 		setSpellList(spells);
 		setComponentTypes(componentTypes);
@@ -89,7 +65,7 @@ function Spells(props) {
 		visibleSpells = filterByLevel(visibleSpells);
 		visibleSpells = filterByClass(visibleSpells);
 		visibleSpells = filterBySearchBox(visibleSpells);
-		filterBySpellBook(visibleSpells).then(visibleSpells => {
+		filterBySpellBook(visibleSpells).then((visibleSpells) => {
 			setVisibleSpellList(visibleSpells);
 		});
 	};
@@ -105,68 +81,72 @@ function Spells(props) {
 	};
 
 	const filterByComponentTypes = (visibleSpells) => {
-		// 0n^2 slow
-		visibleSpells = visibleSpells.filter((spell) => {
-			for (const compType of spell.component_types) {
-				if (!componentTypeFilter.includes(compType)) {
-					return false;
+		// 0n^2 slowest
+		if (componentTypeFilter.length !== 3) {
+			const componentTypeSet = new Set(componentTypeFilter);
+			visibleSpells = visibleSpells.filter((spell) => {
+				for (const compType of spell.component_types) {
+					if (!componentTypeSet.has(compType)) {
+						return false;
+					}
 				}
-			}
-			return true;
-		});
+				return true;
+			});
+		}
 		return visibleSpells;
 	};
 
 	const filterByLevel = (visibleSpells) => {
-		// 0n^2 slow
-		visibleSpells = visibleSpells.filter((spell) => {
-			if (levelFilter.length === 0) {
-				return true;
-			}
-			return levelFilter.includes(spell.spell_level);
-		});
+		if (levelFilter.length > 0) {
+			const levelSet = new Set(levelFilter);
+			visibleSpells = visibleSpells.filter((spell) => {
+				return levelSet.has(spell.spell_level);
+			});
+		}
 		return visibleSpells;
 	};
 
 	const filterByClass = (visibleSpells) => {
 		// 0n^2 slow
-		visibleSpells = visibleSpells.filter((spell) => {
-			if (classFilter.length === 0) {
-				return true;
-			}
-			for (const cl of spell.classes) {
-				if (classFilter.includes(cl)) {
-					return true;
+		if (classFilter.length > 0) {
+			const classSet = new Set(classFilter);
+			visibleSpells = visibleSpells.filter((spell) => {
+				for (const cl of spell.classes) {
+					if (classSet.has(cl)) {
+						return true;
+					}
 				}
-			}
-			return false;
-		});
+				return false;
+			});
+		}
 		return visibleSpells;
 	};
 
 	const filterBySearchBox = (visibleSpells) => {
-		// 0n^2 slow
-		visibleSpells = visibleSpells.filter((spell) => {
-			if (textFilter === '') {
-				return true;
-			}
-			if (spell.spell_name.toLowerCase().indexOf(textFilter) !== -1) {
-				return true;
-			}
-			return false;
-		});
+		if (textFilter) {
+			// 0n^2 slow
+			visibleSpells = visibleSpells.filter((spell) => {
+				if (spell.spell_name.toLowerCase().indexOf(textFilter) !== -1) {
+					return true;
+				}
+				return false;
+			});
+		}
 		return visibleSpells;
 	};
 
 	const filterBySpellBook = async (visibleSpells) => {
-		if(spellBookFilter) {
-			const spellBookSpells = await SpellBookSpellService.get({spell_book_id: spellBookFilter});
-			const spellBookSpellIds = spellBookSpells.map(sbs => sbs.spell_id);
-			console.log(spellBookSpells);
-			visibleSpells = visibleSpells.filter((spell) => {
-				return spellBookSpellIds.includes(spell.spell_id);
+		if (spellBookFilter) {
+			const spellBookSpells = await SpellBookSpellService.get({
+				spell_book_id: spellBookFilter,
 			});
-
+			const spellBookSpellIds = spellBookSpells.map(
+				(sbs) => sbs.spell_id
+			);
+			const spellBookIdSet = new Set(spellBookSpellIds);
+			visibleSpells = visibleSpells.filter((spell) => {
+				return spellBookIdSet.has(spell.spell_id);
+			});
 		}
 		return visibleSpells;
 	};
@@ -231,7 +211,7 @@ function Spells(props) {
 		levelFilter,
 		classFilter,
 		textFilter,
-		spellBookFilter
+		spellBookFilter,
 	]);
 
 	return (
@@ -274,24 +254,17 @@ function Spells(props) {
 					</div>
 					<div className="spell-book-grid">
 						<EasyAccorion title="Spell Books">
-							<SpellBookManager callback={setFilteredSpellbook}></SpellBookManager>
+							<SpellBookManager
+								callback={setFilteredSpellbook}
+							></SpellBookManager>
 						</EasyAccorion>
 					</div>
 				</div>
 			</div>
-			<Accordion defaultActiveKey="0">
-				{visibleSpellList.map((spell, i) => {
-					return (
-						<SpellCard
-							key={i}
-							spell={spell}
-							schoolList={schoolList}
-							damageTypeList={damageTypeList}
-							filterSpells={filterSpells}
-						></SpellCard>
-					);
-				})}
-			</Accordion>
+			<SpellList
+				spellList={visibleSpellList}
+				filterSpells={filterSpells}
+			/>
 		</div>
 	);
 }
