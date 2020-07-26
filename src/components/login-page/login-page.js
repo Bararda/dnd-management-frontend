@@ -9,7 +9,7 @@ function LoginPage(props) {
                 <div id="logo-text">
 
                     <img
-                        src={require('../../assets/images/d20.svg')}
+                        src={require('../../assets/images/red_wings.png')}
                         id="logo"
                         alt="d20"
                     />

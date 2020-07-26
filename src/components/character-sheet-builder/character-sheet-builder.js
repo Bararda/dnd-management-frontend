@@ -50,7 +50,7 @@ export default function CharacterSheetBuilder(props) {
 		return new Promise((res, rej) => {
 			const printComps = [];
 			for(const draggable of components) {
-				const element = draggable.ref.current;
+				const element = draggable.ref.current.getElement();
 				const newRef = React.createRef();
 				const children = cloneChildren(draggable);
 

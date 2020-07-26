@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useImperativeHandle, useRef } from 'react';
 import PropTypes from 'prop-types';
 import './draggable.css';
 
 const Draggable = React.forwardRef(function Draggable(props, ref) {
 	const [classes, setclasses] = useState(['draggable']);
-
+	const dragRef = useRef();
 	const disableHighlight = () => {
 		setclasses(['draggable']);
 	};
@@ -15,7 +15,8 @@ const Draggable = React.forwardRef(function Draggable(props, ref) {
 	 */
 	const startDrag = (ev) => {
 		highlightElement();
-		const element = ref.current;
+		const
+		const element = ref.current.getElement();
 		const rect = element.getBoundingClientRect();
         const offSetX = ev.pageX - rect.left - window.scrollX;
         const offSetY = ev.pageY - rect.top - window.scrollY;
@@ -34,6 +35,16 @@ const Draggable = React.forwardRef(function Draggable(props, ref) {
 			}
 		};
 
+		//doesnt work yet
+		const touchMoveElement = (ev) => {
+			ev.preventDefault();
+			const touch = ev.changedTouches[0];
+			const posY = touch.pageY - offSetY;
+            const posX = touch.pageX - offSetX;
+			element.style.top = posY + 'px';
+			element.style.left = posX + 'px';
+		};
+
 		/**
 		 * Stops the element from dragging and removes the document event listeners
 		 */
@@ -41,18 +52,41 @@ const Draggable = React.forwardRef(function Draggable(props, ref) {
 			disableHighlight();
 			document.removeEventListener('mousemove', moveElement);
 			document.removeEventListener('mouseup', stopDrag);
+			document.removeEventListener('touchend', stopDrag);
+			document.removeEventListener('touchcancel', stopDrag);
+			document.removeEventListener('touchmove', touchMoveElement);
 		};
 
 		document.addEventListener('mousemove', moveElement);
+		document.addEventListener('touchmove', touchMoveElement);
 		document.addEventListener('mouseup', stopDrag);
+		document.addEventListener('touchend', stopDrag);
+		document.addEventListener('touchcancel', stopDrag);
 	};
 
 	const highlightElement = () => {
 		setclasses([...classes, 'border-enabled']);
 	};
 
+	const save = () => {
+		const element = ref.current.getElement();
+		const rect = element.getBoundingClientRect();
+		const draggable = {
+			x: rect.left,
+			y: rect.top,
+		};
+		return draggable;
+	};
+
+	useImperativeHandle(ref, () => ({
+		save,
+		getElement: () => {
+			return dragRef.current;
+		}
+	}));
+
 	return (
-		<div className={classes.join(' ')} onMouseDown={startDrag} ref={ref} style={{left: props.defaultX || 0, top: props.defaultY || 0}}>
+		<div className={classes.join(' ')} onMouseDown={startDrag} onTouchStart={startDrag} ref={dragRef} style={{left: props.defaultX || 0, top: props.defaultY || 0}}>
 			{props.children}
 		</div>
 	);

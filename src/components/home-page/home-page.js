@@ -1,6 +1,6 @@
 import React from 'react';
 import NavBar from '../../core/nav-bar/nav-bar';
-import { Spells, CharacterSheetBuilder, Upcoming, InventoryManager } from '../';
+import { Spells, CharacterSheetBuilder, Upcoming, InventoryManager, NpcManager } from '../';
 import { Switch, Route } from 'react-router-dom';
 import './home-page.css';
 
@@ -19,6 +19,9 @@ function HomePage() {
                     </Route>
                     <Route path={'/home/inventoryManager'}>
                        <InventoryManager />
+                    </Route>
+                    <Route path={'/home/npcManager'}>
+                       <NpcManager />
                     </Route>
                     <Route path={'/home/'}>
                         This is a work in progress application. Updates are irregular and features are worked on in no particular order

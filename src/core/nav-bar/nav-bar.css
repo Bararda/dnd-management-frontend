@@ -1,6 +1,5 @@
 
 .nav-bar {
-    background-color: #283069;
     height: 50px;
 }
 
@@ -30,5 +29,8 @@
 }
 
 .bg-blue {
-    background-color: #283069;
+    background-color: #4485BA;
+}
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255,255,255,.8);
 }

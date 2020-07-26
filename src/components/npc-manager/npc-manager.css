@@ -1,0 +1,50 @@
+.delete-button {
+    position: absolute;
+    bottom: 15px;
+    left: 65px;
+    width: 45px;
+}
+
+.npc-manager {
+    display: grid;
+    grid-template-areas: 
+    "select newnpc"
+    "rollall save"
+    "load load";
+    width: 200px;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+    row-gap: 10px;
+}
+
+
+.roll-all {
+    grid-area: rollall;
+}
+
+.new-npc {
+    grid-area: newnpc;
+}
+
+.save-npc {
+    grid-area: save;
+}
+
+.npc-rolltype-select {
+    grid-area: select;
+
+}
+
+.load-npcs {
+    grid-area: load;
+}
+
+.btn-outline-light {
+    border-color: #79C7FF;
+    color: #79C7FF;
+}
+.btn-outline-light:hover {
+    color: white;
+    background-color: #79C7FF;
+    border-color: #79C7FF;
+}

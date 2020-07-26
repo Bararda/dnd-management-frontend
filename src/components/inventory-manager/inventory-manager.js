@@ -1,5 +1,5 @@
 import React from 'react';
-import Item from './items/item/item';
+// import Item from './items/item/item';
 function InventoryManager(props) {
     return (
         <div>

@@ -1,6 +1,5 @@
 import React from 'react';
 import TitleText from '../../generic/titleText/titleText';
-import Card from 'react-bootstrap/Card';
 import PropTypes from 'prop-types';
 
 import './spell-card.css';

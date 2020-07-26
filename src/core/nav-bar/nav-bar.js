@@ -11,7 +11,7 @@ function NavBar() {
 		<Navbar collapseOnSelect expand="lg" bg="blue" variant="dark">
 			<Navbar.Brand href="#home">
 				<img
-					src={require('../../assets/images/dnd_logo.svg')}
+					src={require('../../assets/images/blue_wings.png')}
 					className="nav-logo"
 					alt="dnd"
 				/>
@@ -27,7 +27,9 @@ function NavBar() {
 					<NavItem href="inventoryManager">
 						Inventory Manager
 					</NavItem>
-
+					<NavItem href="npcManager">
+						NPC Manager
+					</NavItem>
 				</Nav>
                 <Nav>
                     <NavBarDropDown></NavBarDropDown>
