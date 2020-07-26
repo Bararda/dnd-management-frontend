@@ -15,7 +15,6 @@ const Draggable = React.forwardRef(function Draggable(props, ref) {
 	 */
 	const startDrag = (ev) => {
 		highlightElement();
-		const
 		const element = ref.current.getElement();
 		const rect = element.getBoundingClientRect();
         const offSetX = ev.pageX - rect.left - window.scrollX;

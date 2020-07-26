@@ -97,7 +97,6 @@ function NpcManager(props) {
 				let key = components.length;
 				if(Array.isArray(json)) {
 					for(const comp of json) {
-						console.log(comp);
 						const [npc, draggable] = getNewNpc(comp.npcState, comp.dragState, key);
 						newNpcs.push(npc);
 						newDraggables.push(draggable);
