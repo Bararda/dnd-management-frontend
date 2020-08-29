@@ -13,7 +13,7 @@ import EasyAccorion from '../generic/easy-accordion/easy-accordion';
 import SearchBox from '../generic/search-box/search-box';
 import SpellBookManager from '../spell-books/spell-book-manager/spell-book-manager';
 import SpellList from './spell-list/spell-list';
-
+import SchoolList from './school-list/school-list';
 /**
  * A component that lists the spells
  * @param {React.Props} props
@@ -28,7 +28,7 @@ function Spells(props) {
 	const [spellBookFilter, setSpellBookFilter] = useState(false);
 	const [componentTypeList, setComponentTypes] = useState([]);
 	const [visibleSpellList, setVisibleSpellList] = useState([]);
-
+	const [schoolFilter, setSchoolFilter] = useState([]);
 	/**
 	 * Loads the spell list data and calls the initialization function
 	 */
@@ -65,6 +65,7 @@ function Spells(props) {
 		visibleSpells = filterByLevel(visibleSpells);
 		visibleSpells = filterByClass(visibleSpells);
 		visibleSpells = filterBySearchBox(visibleSpells);
+		visibleSpells = filterBySchool(visibleSpells);
 		filterBySpellBook(visibleSpells).then((visibleSpells) => {
 			setVisibleSpellList(visibleSpells);
 		});
@@ -122,6 +123,19 @@ function Spells(props) {
 		return visibleSpells;
 	};
 
+	const filterBySchool = (visibleSpells) => {
+		if (schoolFilter.length > 0) {
+			const schoolSet = new Set(schoolFilter);
+			visibleSpells = visibleSpells.filter((spell) => {
+				if (schoolSet.has(spell.school_id)) {
+					return true;
+				}
+				return false;
+			});
+		}
+		return visibleSpells;
+	};
+
 	const filterBySearchBox = (visibleSpells) => {
 		if (textFilter) {
 			// 0n^2 slow
@@ -158,6 +172,10 @@ function Spells(props) {
 	const setFilteredDamageType = (event) => {
 		const dt = event.target.value.toLowerCase();
 		setDamageTypeFilter(dt);
+	};
+
+	const setFilteredSchools = (schools) => {
+		setSchoolFilter([...schools]);
 	};
 
 	/**
@@ -212,6 +230,7 @@ function Spells(props) {
 		classFilter,
 		textFilter,
 		spellBookFilter,
+		schoolFilter,
 	]);
 
 	return (
@@ -224,12 +243,14 @@ function Spells(props) {
 							<div className="advanced-grid">
 								<span>Component Types</span>
 								<span>Damage Types</span>
+								<span>Schools</span>
 								<ComponentTypes
 									onChange={setFilteredComponentType}
 									filter={componentTypeFilter}
 									componentTypeList={componentTypeList}
 								/>
 								<DamageTypes onChange={setFilteredDamageType} />
+								<SchoolList onChange={setFilteredSchools} />
 							</div>
 						</EasyAccorion>
 					</div>
