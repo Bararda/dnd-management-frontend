@@ -1,0 +1,23 @@
+.rune-puzzle {
+	height: 500px;
+	width: 500px;
+	padding: 10px;
+	border-radius: 100px;
+	position: relative;
+	cursor: pointer;
+}
+
+.rune-image {
+	height: 100%;
+	width: 100%;
+}
+
+.dot-container {
+	position: absolute;
+	top: 40%;
+	left: 35%;
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	column-gap: 10px;
+	row-gap: 10px;
+}

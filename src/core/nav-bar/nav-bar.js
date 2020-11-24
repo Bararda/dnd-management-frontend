@@ -30,6 +30,9 @@ function NavBar() {
 					<NavItem href="npcManager">
 						NPC Manager
 					</NavItem>
+					<NavItem href="RunePuzzle">
+						Rune Puzzle
+					</NavItem>
 				</Nav>
                 <Nav>
                     <NavBarDropDown></NavBarDropDown>

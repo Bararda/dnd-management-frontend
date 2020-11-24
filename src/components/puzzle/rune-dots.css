@@ -1,0 +1,12 @@
+.rune-dot {
+	border: 1px solid black;
+	border-radius: 200px;
+	height: 20px;
+	width: 20px;
+	cursor: grab;
+}
+
+.correct {
+	background-color: black;
+	border: 1px solid white;
+}
