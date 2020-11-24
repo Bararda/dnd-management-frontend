@@ -6,6 +6,7 @@ import ComponentTypeService from './componentType.service';
 import ClassService from './class.service';
 import SpellBookService from './spellBook.service';
 import SpellBookSpellService from './SpellBookSpell.service';
+import PuzzleService from './puzzle.service';
 
 export {
     AuthService,
@@ -15,5 +16,6 @@ export {
     DamageTypeService,
     SchoolService,
     ComponentTypeService,
-    ClassService
+    ClassService,
+    PuzzleService
 };
