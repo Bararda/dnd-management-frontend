@@ -1,0 +1,8 @@
+@media print {
+    .control-panel {
+        display: none;
+    }
+}
+.control-panel {
+    width: max-content;
+}

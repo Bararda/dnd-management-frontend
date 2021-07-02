@@ -1,0 +1,52 @@
+#main-page {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    background: linear-gradient(#4F9CDA, #C32323);
+    overflow: hidden;
+}
+
+#login-form-container {
+    padding: 20px;
+    border-radius: 5px;
+}
+#logo-container {
+    height: 100%;
+    margin-left: 60%;
+    margin-right: auto;
+    width: 20%;
+    min-width: 250px;
+}
+#logo {
+    margin-top: 30px;
+    height: 100%
+}
+#logo-text {
+    text-align: center;
+    height: 20%;
+
+}
+
+@media only screen and (prefers-color-scheme: dark) {
+    html, body, #root, #app {
+        background-color: #242425;
+        color: white;
+    }
+    #logo-container {
+        background-color: #242425AA;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+
+    #logo-container {
+        width: 100%;
+        margin: 0px;
+    }
+    #login-form-container {
+        padding-top: 0px;
+    }
+    .hide-on-mobile {
+        display: none;
+    }
+}

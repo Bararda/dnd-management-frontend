@@ -1,0 +1,22 @@
+.level {
+    font-weight: lighter;
+    font-style: italic;
+    font-size: .9rem;
+}
+
+.spell-description {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.higher-levels {
+    margin-top: 10px;
+}
+
+.spell-book-toggle{
+    float: right;
+}
+.spell-card {
+    padding: 1rem;
+    border: 1px solid #1F1F20;
+}

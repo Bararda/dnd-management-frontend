@@ -1,0 +1,12 @@
+.decorated-text-area {
+    line-height: 1.5;
+    /* box-shadow: 1px 1px 1px #999; */
+    resize: both;
+}
+
+
+@media print {
+    .decorated-text-area {
+        resize: none;
+    }
+}

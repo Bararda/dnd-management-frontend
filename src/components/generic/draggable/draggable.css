@@ -1,0 +1,18 @@
+.draggable {
+    position: absolute;
+    padding: 13px;
+    width: max-content;
+    border: 2px solid transparent
+}
+
+.border-enabled {
+    border-radius: 15px;
+    border: 2px solid #0ab5f555
+}
+
+@media print {
+    .draggable {
+        padding-bottom: 0px;
+        border: none;
+    }
+}

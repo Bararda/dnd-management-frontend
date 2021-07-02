@@ -1,7 +1,62 @@
-.title {
-    font-weight: bold;
+.header {
+    display: flex;
 }
-.level {
-    font-weight: lighter;
-    font-style: italic;
+
+.filter {
+    margin-bottom: 2%;
+}
+
+.component-types-grid {
+    grid-area: advanced;
+    height: max-content;
+}
+
+.damage-types-grid {
+    grid-area: damage;
+}
+
+.class-list-grid {
+    grid-area: class;
+}
+
+.level-list-grid {
+    grid-area: level;
+}
+
+.spell-book-grid {
+    grid-area: spellBook;
+}
+
+.filter-options-container {
+    display: grid;
+    grid-template-rows: auto auto auto;
+    grid-template-columns: 50% 50%;
+    grid-template-areas: 
+    "class level"
+    "advanced advanced"
+    "spellBook spellBook"
+}
+
+.advanced-grid {
+    display: grid;
+    grid-template-columns: max-content 1fr 1fr;
+    column-gap: 20px;
+    row-gap: 10px;
+	width: 100%;
+}
+
+
+@media only screen and (max-width: 755px) {
+
+    .hidden-on-mobile {
+        display: none;
+    }
+
+    .show-on-mobile {
+        display: inline-block;
+    }
+
+}
+.list {
+    width: 100%;
 }

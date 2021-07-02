@@ -1,0 +1,7 @@
+.ritual {
+	display: grid;
+	grid-template-columns: max-content max-content;
+	column-gap: 10px;
+	margin-top: 20px;
+	align-items: center;
+}
