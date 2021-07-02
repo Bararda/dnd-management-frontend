@@ -30,6 +30,7 @@ export default function DamageTypes(props) {
     
     return (
         <div className="damage-types">
+            <span>Damage Types</span>
             <Form.Control
                 as="select"
                 onChange={ev => {

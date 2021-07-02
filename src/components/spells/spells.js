@@ -7,6 +7,7 @@ import {
 import './spells.css';
 import ComponentTypes from './component-types/component-types';
 import DamageTypes from './damage-types/damage-types';
+import Concentration from './concentration/concentration';
 import LevelList from '../generic/level-list/level-list';
 import ClassList from '../generic/class-list/class-list';
 import EasyAccorion from '../generic/easy-accordion/easy-accordion';
@@ -14,6 +15,8 @@ import SearchBox from '../generic/search-box/search-box';
 import SpellBookManager from '../spell-books/spell-book-manager/spell-book-manager';
 import SpellList from './spell-list/spell-list';
 import SchoolList from './school-list/school-list';
+import CastingTimes from './casting-times/casting-times';
+import Ritual from './ritual/ritual';
 /**
  * A component that lists the spells
  * @param {React.Props} props
@@ -23,12 +26,15 @@ function Spells(props) {
 	const [textFilter, setTextFilter] = useState('');
 	const [damageTypeFilter, setDamageTypeFilter] = useState('0');
 	const [componentTypeFilter, setComponentTypeFilter] = useState([]);
+	const [concentrationFilter, setConcentrationFilter] = useState(null);
 	const [levelFilter, setLevelFilter] = useState([]);
 	const [classFilter, setClassFilter] = useState([]);
 	const [spellBookFilter, setSpellBookFilter] = useState(false);
 	const [componentTypeList, setComponentTypes] = useState([]);
 	const [visibleSpellList, setVisibleSpellList] = useState([]);
 	const [schoolFilter, setSchoolFilter] = useState([]);
+	const [castingTimeFilter, setCastingTimeFilter] = useState(null);
+	const [ritualFilter, setRitualFilter] = useState(0);
 	/**
 	 * Loads the spell list data and calls the initialization function
 	 */
@@ -66,6 +72,9 @@ function Spells(props) {
 		visibleSpells = filterByClass(visibleSpells);
 		visibleSpells = filterBySearchBox(visibleSpells);
 		visibleSpells = filterBySchool(visibleSpells);
+		visibleSpells = filterByConcentration(visibleSpells);
+		visibleSpells = filterByCastingTime(visibleSpells);
+		visibleSpells = filterByRitual(visibleSpells);
 		filterBySpellBook(visibleSpells).then((visibleSpells) => {
 			setVisibleSpellList(visibleSpells);
 		});
@@ -80,6 +89,33 @@ function Spells(props) {
 		}
 		return visibleSpells;
 	};
+
+	const filterByConcentration = (visibleSpells) => {
+		if(concentrationFilter !== null) {
+			visibleSpells = visibleSpells.filter((spell) => {
+				return spell.concentration === concentrationFilter;
+			});
+		}
+		return visibleSpells;
+	};
+
+	const filterByRitual = (visibleSpells) => {
+		if(ritualFilter) {
+			visibleSpells = visibleSpells.filter((spell) => {
+				return spell.ritual;
+			});
+		}
+		return visibleSpells;
+	};
+
+	const filterByCastingTime = (visibleSpells) => {
+		if(castingTimeFilter !== null) {
+			visibleSpells = visibleSpells.filter((spell) => {
+				return spell.casting_time.toLowerCase().includes(castingTimeFilter);
+			});
+		}
+		return visibleSpells;
+	}
 
 	const filterByComponentTypes = (visibleSpells) => {
 		// 0n^2 slowest
@@ -174,6 +210,16 @@ function Spells(props) {
 		setDamageTypeFilter(dt);
 	};
 
+	const setFilteredCastingTime = (event) => {
+		const castingTime = event.target.value.toLowerCase();
+		if(castingTime === 'null') return setCastingTimeFilter(null);
+		setCastingTimeFilter(castingTime);
+	};
+
+	const setFilteredRituals = (ritual) => {
+		setRitualFilter(ritual);
+	};
+
 	const setFilteredSchools = (schools) => {
 		setSchoolFilter([...schools]);
 	};
@@ -198,6 +244,16 @@ function Spells(props) {
 		const searchText = ev.target.value.toLowerCase();
 		setTextFilter(searchText);
 	};
+
+	const setConcentration = (ev) => {
+		const concentration = ev.target.value;
+		console.log(concentration);
+		if(concentration === 'null') {
+			return setConcentrationFilter(null);
+			
+		}
+		setConcentrationFilter(parseInt(concentration, 10));
+	}
 
 	/**
 	 * gets the selected elements in the level select box and sets the level filter
@@ -231,6 +287,9 @@ function Spells(props) {
 		textFilter,
 		spellBookFilter,
 		schoolFilter,
+		concentrationFilter,
+		castingTimeFilter,
+		ritualFilter,
 	]);
 
 	return (
@@ -241,9 +300,6 @@ function Spells(props) {
 					<div className="component-types-grid">
 						<EasyAccorion title="Advanced">
 							<div className="advanced-grid">
-								<span>Component Types</span>
-								<span>Damage Types</span>
-								<span>Schools</span>
 								<ComponentTypes
 									onChange={setFilteredComponentType}
 									filter={componentTypeFilter}
@@ -251,6 +307,9 @@ function Spells(props) {
 								/>
 								<DamageTypes onChange={setFilteredDamageType} />
 								<SchoolList onChange={setFilteredSchools} />
+								<Concentration onChange={setConcentration}/>
+								<CastingTimes onChange={setFilteredCastingTime} />
+								<Ritual onChange={setFilteredRituals} />
 							</div>
 						</EasyAccorion>
 					</div>

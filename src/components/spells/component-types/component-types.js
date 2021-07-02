@@ -5,6 +5,9 @@ import './component-types.css';
 // TODO add state into component
 export default function ComponentTypes(props) {
     return (
+        <div>
+                        <span>Component Types</span>
+
         <div className='component-types'>
             {props.componentTypeList.map((ct) => {
                 return (
@@ -22,6 +25,7 @@ export default function ComponentTypes(props) {
                     />
                 );
             })}
+        </div>
         </div>
     );
 }

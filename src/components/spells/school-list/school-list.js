@@ -55,7 +55,7 @@ export default function SchoolList(props) {
 
     return (
         <div>
-
+			<span>Schools</span>
             <div className="show-on-mobile school-select">
 				<Form.Control
 					as="select"

@@ -41,6 +41,7 @@
     display: grid;
     grid-template-columns: max-content 1fr 1fr;
     column-gap: 20px;
+    row-gap: 10px;
 	width: 100%;
 }
 
