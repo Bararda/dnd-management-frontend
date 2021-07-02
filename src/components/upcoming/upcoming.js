@@ -7,25 +7,7 @@ export default function Upcoming() {
 			<EasyAccoridon title="More Spell Filters">
                 <ul>
                     <li>
-                        Range
-                    </li>
-                    <li>
-                        Concentration
-                    </li>
-                    <li>
-                        Ritual Casting
-                    </li>
-                    <li>
-                        Casting Time
-                    </li>
-                    <li>
                         Average/Maximum/Minimum Damage
-                    </li>
-                    <li>
-                        School Of Magic
-                    </li>
-                    <li>
-                        Favorited Spells
                     </li>
                 </ul>
             </EasyAccoridon>

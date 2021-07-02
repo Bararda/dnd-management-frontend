@@ -87,50 +87,50 @@ export default function SpellList(props) {
                     return 0;
                 }
 				if (
-					spellA.spell_range.includes('Self') &&
-					spellB.spell_range.includes('Self')
+					spellA.spell_range.includes(Range.Self) &&
+					spellB.spell_range.includes(Range.Self)
 				) {
 					return 0;
 				}
-				if (spellA.spell_range.includes('Self')) {
+				if (spellA.spell_range.includes(Range.Self)) {
 					return -1;
 				}
-				if (spellB.spell_range.includes('Self')) {
+				if (spellB.spell_range.includes(Range.Self)) {
 					return 1;
 				}
-				if (spellA.spell_range === 'Touch') {
+				if (spellA.spell_range === Range.Touch) {
 					return -1;
 				}
-				if (spellB.spell_range === 'Touch') {
+				if (spellB.spell_range === Range.Touch) {
 					return 1;
                 }
                 //reversed because unlimited and special and sight are big (unlimited last, then special, then sight)
-                if(spellA.spell_range === 'Unlimited') {
+                if(spellA.spell_range === Range.Unlimited) {
                     return 1;
                 }
-                if(spellB.spell_range === 'Unlimited') {
+                if(spellB.spell_range === Range.Unlimited) {
                     return -1;
                 }
-                if(spellA.spell_range === 'Special') {
+                if(spellA.spell_range === Range.Special) {
                     return 1;
                 }
-                if(spellB.spell_range === 'Special') {
+                if(spellB.spell_range === Range.Special) {
                     return -1;
                 }
-                if(spellA.spell_range === 'Sight') {
+                if(spellA.spell_range === Range.Sight) {
                     return 1;
                 }
-                if(spellB.spell_range === 'Sight') {
+                if(spellB.spell_range === Range.Sight) {
                     return -1;
                 }
 
 
 				let spellARange = parseInt(spellA.spell_range, 10);
 				let spellBRange = parseInt(spellB.spell_range, 10);
-				if (spellA.spell_range.includes('mile')) {
+				if (spellA.spell_range.includes(Range.Mile)) {
 					spellARange = spellARange * feetPerMile;
 				}
-				if (spellB.spell_range.includes('mile')) {
+				if (spellB.spell_range.includes(Range.Mile)) {
 					spellBRange = spellBRange * feetPerMile;
 				}
 				if (spellARange < spellBRange) {
@@ -317,3 +317,12 @@ const conditionalRowStyles = [
 		},
 	},
 ];
+
+const Range = {
+	Self: 'Self',
+	Touch: 'Touch',
+	Unlimited: 'Unlimited',
+	Special: 'Special',
+	Sight: 'Sight',
+	Mile: 'Mile',
+}
