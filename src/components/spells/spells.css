@@ -52,6 +52,15 @@
         display: none;
     }
 
+    .advanced-grid {
+        display: grid;
+        grid-template-columns: max-content;
+        column-gap: 20px;
+        row-gap: 10px;
+        width: 100%;
+        justify-content: center;
+    }
+
     .show-on-mobile {
         display: inline-block;
     }
